@@ -1,9 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, TouchableNativeFeedback} from 'react-native';
 import  {Text} from 'react-native-paper';
+import { AsyncStorage } from 'react-native';
 
 export default class DifficultyScreen extends React.Component{
 
+    state = {userName: ""};
     styles = StyleSheet.create({
 
         container: {
@@ -57,12 +59,34 @@ export default class DifficultyScreen extends React.Component{
         super(props);
     }
 
+    _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('userName');
+            if (value !== null) {
+                this.setState({userName: value});
+                // We have data!!
+                console.log(value);
+            }
+        } catch (error) {
+            // Error retrieving data
+        }
+    };
+
+    componentDidMount() {
+         this._retrieveData();
+    }
+
     render() {
+
+        //const { userName } = this.props.route.params;
 
         const { navigation } = this.props;
 
         return(
             <View style={this.styles.container}>
+
+                <Text>userName: {this.state.userName}</Text>
+
                 <TouchableNativeFeedback onPress={() => { navigation.navigate("A1 (Makkelijk)") }}>
                     <Text style={this.styles.btnStyleEasy}>A1 (Makkelijk)</Text>
                 </TouchableNativeFeedback>
