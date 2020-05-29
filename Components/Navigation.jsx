@@ -25,7 +25,7 @@ export default class Navigation extends React.Component {
                                         headerTintColor: '#fff',
                                         headerTitleStyle: {
                                             fontWeight: 'bold',
-                                            justifyContents : 'center',
+                                            justifyContent : 'center',
                                         },
                                     }}/>
                     <Stack.Screen name="DifficultyScreen" component={DifficultyScreen}
